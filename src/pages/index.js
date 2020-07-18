@@ -1,5 +1,19 @@
 import React from 'react';
+import { Link } from 'gatsby';
+import Layout from '../components/layout';
 
-export default function Home() {
-  return <div>Introduction to Gatsby!</div>;
-}
+const IndexPage = () => {
+  return (
+    <div>
+      <Layout>
+        <h1>Hello.</h1>
+        <h2>I'm Jimmy, a full-stack web developer living in New York City.</h2>
+        <p>
+          In need of a developer? <Link to="/contact">Contact me.</Link>
+        </p>
+      </Layout>
+    </div>
+  );
+};
+
+export default IndexPage;
