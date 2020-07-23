@@ -4,33 +4,28 @@ import Layout from '../components/layout';
 import classes from './blog.module.scss';
 
 const Blog = () => {
-  const markdown = useStaticQuery(graphql`
+  const data = useStaticQuery(graphql`
     query {
-      allMarkdownRemark {
-        edges {
-          node {
-            frontmatter {
-              date
-              title
-            }
-            fields {
-              slug
-            }
-          }
+      allContentfulBlogPost(sort: { fields: publishedDate, order: DESC }) {
+        nodes {
+          title
+          slug
+          publishedDate(formatString: "MMMM Do, YYYY")
         }
       }
     }
   `);
+
   return (
     <Layout>
       <div>
         <h1>Blog</h1>
         <ol className={classes.Posts}>
-          {markdown.allMarkdownRemark.edges.map((post, i) => (
+          {data.allContentfulBlogPost.nodes.map((post, i) => (
             <li key={i} className={classes.Post}>
-              <Link to={post.node.fields.slug}>
-                <h2>{post.node.frontmatter.title}</h2>
-                <p>{post.node.frontmatter.date}</p>
+              <Link to={post.slug}>
+                <h2>{post.title}</h2>
+                <p>{post.publishedDate}</p>
               </Link>
             </li>
           ))}
@@ -41,3 +36,30 @@ const Blog = () => {
 };
 
 export default Blog;
+
+/*
+allMarkdownRemark {
+  edges {
+    node {
+      frontmatter {
+        date
+        title
+      }
+      fields {
+        slug
+      }
+    }
+  }
+}   
+<h2>Posts in Markdown</h2>
+  <ol className={classes.Posts}>
+    {data.allMarkdownRemark.edges.map((post, i) => (
+      <li key={i} className={classes.Post}>
+        <Link to={post.node.fields.slug}>
+          <h3>{post.node.frontmatter.title}</h3>
+          <p>{post.node.frontmatter.date}</p>
+        </Link>
+      </li>
+    ))}
+  </ol>
+  */
