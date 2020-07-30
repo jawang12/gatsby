@@ -1,6 +1,8 @@
 import React from 'react';
-import { Link, graphql, useStaticQuery } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
+import { Link } from 'gatsby-plugin-intl';
 import classes from './header.module.scss';
+import Language from './language';
 
 const Header = () => {
   const data = useStaticQuery(graphql`
@@ -57,6 +59,9 @@ const Header = () => {
             >
               Contact
             </Link>
+          </li>
+          <li className={classes.Language}>
+            <Language />
           </li>
         </ul>
       </nav>

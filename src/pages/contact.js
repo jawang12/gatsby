@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'gatsby-plugin-intl';
 
 import Layout from '../components/layout';
 import Head from '../components/head';
@@ -8,10 +9,12 @@ const Contact = () => {
     <Layout>
       <Head title="Contact" />
       <div>
-        <h1>Contact me!</h1>
+        <h1>
+          <FormattedMessage id="contact" />
+        </h1>
         <p>example1@gmail.com</p>
         <p>
-          Follow me on Twitter!{' '}
+          <FormattedMessage id="twitter" />
           <a
             href="https://twitter.com/James_Wang12"
             rel="noreferrer"
